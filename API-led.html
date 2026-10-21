@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API-led connectivity · overview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f5f7fc;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* header */
+        .hero {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #0b3d91, #1e5bbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .subhead {
+            font-size: 1.2rem;
+            color: #475569;
+            max-width: 750px;
+            margin: 0 auto;
+            border-bottom: 2px solid #d0ddeb;
+            padding-bottom: 1.5rem;
+        }
+
+        /* card style */
+        .card {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 20, 50, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            padding: 2rem 2rem 1.8rem;
+            margin-bottom: 2rem;
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+            border: 1px solid #e9eef4;
+        }
+
+        .card:hover {
+            box-shadow: 0 20px 30px -10px rgba(0, 40, 100, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .card h2 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1.4rem;
+            color: #0a2c4e;
+            border-left: 6px solid #1e5bbf;
+            padding-left: 1rem;
+        }
+
+        .card h2 .emoji {
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 1.4rem 0 0.8rem;
+            color: #1e3a6b;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* grid layout for the three layers */
+        .layers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.4rem;
+            margin: 1.5rem 0 0.8rem;
+        }
+
+        .layer-card {
+            background: #f9fbfe;
+            border-radius: 1.2rem;
+            padding: 1.5rem 1.3rem;
+            border: 1px solid #dde6f2;
+            transition: background 0.2s;
+        }
+
+        .layer-card:hover {
+            background: #f0f5ff;
+        }
+
+        .layer-card .layer-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            background: #dbeafe;
+            color: #1e4b8c;
+            margin-bottom: 0.8rem;
+        }
+
+        .layer-card h4 {
+            font-size: 1.3rem;
+            font-weight: 650;
+            margin-bottom: 0.5rem;
+            color: #0b2d5a;
+        }
+
+        .layer-card p {
+            font-size: 0.95rem;
+            color: #334155;
+        }
+
+        /* benefits & drawbacks columns */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .benefit-list, .drawback-list {
+            list-style: none;
+        }
+
+        .benefit-list li, .drawback-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.8rem;
+            position: relative;
+            font-size: 1rem;
+        }
+
+        .benefit-list li::before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+            font-size: 1.1rem;
+            top: 0.05rem;
+        }
+
+        .drawback-list li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            font-size: 1.1rem;
+            top: 0.05rem;
+        }
+
+        .benefit-list strong, .drawback-list strong {
+            color: #0b2d5a;
+            font-weight: 650;
+        }
+
+        /* highlight stat */
+        .stat-highlight {
+            background: #eef4ff;
+            border-radius: 1rem;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0 0.5rem;
+            border-left: 4px solid #1e5bbf;
+            font-size: 0.98rem;
+        }
+
+        .stat-highlight span {
+            font-weight: 700;
+            color: #0b3d91;
+        }
+
+        /* small note */
+        .footnote {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-top: 1rem;
+            text-align: center;
+            border-top: 1px solid #dce5f0;
+            padding-top: 1.5rem;
+        }
+
+        /* responsive */
+        @media (max-width: 700px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .card {
+                padding: 1.5rem 1.2rem;
+            }
+            .two-col {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .card h2 {
+                font-size: 1.6rem;
+            }
+            .layers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* small visual for point-to-point vs api-led */
+        .compare-badge {
+            display: inline-block;
+            background: #e6edf8;
+            border-radius: 50px;
+            padding: 0.2rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1a4b8c;
+        }
+
+        .insight {
+            font-style: italic;
+            background: #f8fafd;
+            padding: 0.9rem 1.2rem;
+            border-radius: 0.8rem;
+            border: 1px dashed #b8cee8;
+            margin: 1.2rem 0 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero -->
+        <div class="hero">
+            <h1>API‑led connectivity</h1>
+            <div class="subhead">
+                A composable integration architecture that replaces fragile point‑to‑point links with reusable, layered APIs.
+            </div>
+        </div>
+
+        <!-- What is it -->
+        <div class="card">
+            <h2><span class="emoji">🧩</span> What is API‑led connectivity?</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 1.2rem;">
+                API‑led connectivity is an architectural approach that connects data, applications, and systems 
+                through <strong>standardized, reusable APIs</strong> — instead of building custom, direct connections 
+                between every pair of systems. It breaks down silos and enables agility by organizing APIs into 
+                three logical layers.
+            </p>
+
+            <div class="layers-grid">
+                <div class="layer-card">
+                    <div class="layer-badge">Layer 1 · bottom</div>
+                    <h4>System APIs</h4>
+                    <p>Connect directly to core systems of record (ERP, CRM, databases). They abstract backend complexity and expose data in a canonical format.</p>
+                </div>
+                <div class="layer-card">
+                    <div class="layer-badge">Layer 2 · middle</div>
+                    <h4>Process APIs</h4>
+                    <p>Orchestrate and transform data from multiple System APIs, implementing business logic (e.g., aggregate customer, order, and inventory data).</p>
+                </div>
+                <div class="layer-card">
+                    <div class="layer-badge">Layer 3 · top</div>
+                    <h4>Experience APIs</h4>
+                    <p>Tailored for specific channels (mobile, web, partner). They optimize payloads and interaction patterns for the best user experience.</p>
+                </div>
+            </div>
+
+            <div class="insight">
+                💡 Instead of “spaghetti” point‑to‑point wiring (A→B, A→C, B→D…), you expose APIs once and reuse them across many experiences and processes.
+            </div>
+        </div>
+
+        <!-- Benefits & Drawbacks side by side -->
+        <div class="card">
+            <h2><span class="emoji">⚖️</span> Benefits & drawbacks</h2>
+            <div class="two-col">
+                <!-- Benefits column -->
+                <div>
+                    <h3 style="margin-top: 0;">✅ Key benefits</h3>
+                    <ul class="benefit-list">
+                        <li><strong>Decoupling & flexibility</strong> — systems don’t talk directly; you can change backends without breaking experiences.</li>
+                        <li><strong>Reusability</strong> — a single API (e.g., “Customer”) is used by many apps, reducing development time and cost.</li>
+                        <li><strong>Agility & speed</strong> — new projects can compose existing APIs instead of rebuilding point‑to‑point links.</li>
+                        <li><strong>Scalability</strong> — modular layers make it easier to add new systems or channels without a domino effect.</li>
+                        <li><strong>Governance & visibility</strong> — a catalog of APIs enables discovery, security policies, and consistent monitoring.</li>
+                    </ul>
+                </div>
+
+                <!-- Drawbacks column -->
+                <div>
+                    <h3 style="margin-top: 0;">⚠️ Common drawbacks</h3>
+                    <ul class="drawback-list">
+                        <li><strong>Over‑engineering</strong> — forcing every integration through all three layers adds complexity and slows delivery (Gartner warns of over‑decomposition).</li>
+                        <li><strong>Hidden costs & lower reuse</strong> — many organizations see higher than expected costs; a survey found 48% felt costs were higher than anticipated.</li>
+                        <li><strong>Performance & latency</strong> — each API layer adds a network hop, which can hurt latency‑sensitive or high‑volume scenarios.</li>
+                        <li><strong>Skill gaps & organizational readiness</strong> — requires API design, governance, and platform skills; 41% of organizations said they were not ready for API‑led adoption.</li>
+                        <li><strong>API sprawl</strong> — without strict governance, APIs proliferate in silos, leading to duplication and maintenance overhead.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Highlight some stats -->
+            <div class="stat-highlight">
+                <span>📊 Industry reality check:</span> Reuse often falls short — a major auto manufacturer abandoned a multi‑million dollar project because fewer than 40% of APIs were reused. Another survey found <strong>48%</strong> of companies experienced higher costs than expected. 
+                <span style="display: block; margin-top: 0.6rem;">API‑led works best when applied pragmatically, not as a universal mandate.</span>
+            </div>
+        </div>
+
+        <!-- Point-to-point vs API-led quick compare -->
+        <div class="card">
+            <h2><span class="emoji">🔄</span> Point‑to‑point vs. API‑led</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start;">
+                <div style="flex: 1; min-width: 210px;">
+                    <h3 style="margin-top: 0;">Point‑to‑point integration</h3>
+                    <p style="color: #334155;">Direct, custom connections between systems. Simple for 2–3 apps, but becomes a “spaghetti” of tight coupling, poor reuse, and high maintenance as the number of systems grows.</p>
+                </div>
+                <div style="flex: 1; min-width: 210px;">
+                    <h3 style="margin-top: 0;">API‑led connectivity</h3>
+                    <p style="color: #334155;">Systems expose standardized APIs. Applications consume APIs instead of connecting directly. This decouples systems, enables reuse, and dramatically reduces the number of point‑to‑point links.</p>
+                </div>
+            </div>
+            <div class="compare-badge" style="margin-top: 1.2rem;">
+                🔗 point‑to‑point = n(n‑1)/2 connections &nbsp;|&nbsp; 🧩 API‑led = reusable building blocks
+            </div>
+        </div>
+
+        <!-- footer / small note -->
+        <div class="footnote">
+            API‑led connectivity — overview for architects and developers. Based on common industry patterns and critiques.
+        </div>
+    </div>
+</body>
+</html>
